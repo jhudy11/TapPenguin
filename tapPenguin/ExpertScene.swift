@@ -1,8 +1,8 @@
 //
-//  GameScene.swift
+//  ExpertScene.swift
 //  tapPenguin
 //
-//  Created by Joshua Hudson on 11/26/16.
+//  Created by Joshua Hudson on 12/3/16.
 //  Copyright © 2016 com.ParanoidPenguinProductions. All rights reserved.
 //
 
@@ -10,9 +10,8 @@ import SpriteKit
 import GameplayKit
 
 //Declared in a global position to allow for use in GameOverScene
-var scoreNumber = 0
 
-class GameScene: SKScene {
+class ExpertScene: SKScene {
     
     
     let scoreLabel = SKLabelNode(fontNamed: "Pusab")
@@ -32,9 +31,9 @@ class GameScene: SKScene {
         
         super.init(size: size)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     func random() -> CGFloat {
@@ -95,7 +94,7 @@ class GameScene: SKScene {
         
         //Shrink the disc over a timeframe of 3 sec
         disc.run(SKAction.sequence([
-            SKAction.scale(to: 0, duration: 3),
+            SKAction.scale(to: 0, duration: 1.25),
             playGameOverSoundEffect,
             SKAction.run(runGameOver)
             ]))
@@ -103,7 +102,7 @@ class GameScene: SKScene {
     
     func spawnBombDisc() {
         
-        let randomCountNumber = arc4random()%25
+        let randomCountNumber = arc4random()%5
         
         if randomCountNumber == 0 {
             
@@ -122,11 +121,11 @@ class GameScene: SKScene {
             
             //Shrink the disc over a timeframe of 1.25 sec
             /* bomb.run(SKAction.sequence([
-             SKAction.scale(to: 0, duration: 1.25),
-             playGameOverSoundEffect,
-             SKAction.run(runGameOver)
-             ]))
-             */
+                SKAction.scale(to: 0, duration: 1.25),
+                playGameOverSoundEffect,
+                SKAction.run(runGameOver)
+                ]))
+            */
             
             bomb.run(SKAction.sequence([
                 SKAction.scale(to: 0, duration: 1.25)
@@ -170,10 +169,11 @@ class GameScene: SKScene {
                 spawnNewDisc()
                 spawnBombDisc()
                 
-                scoreNumber += 1
+                scoreNumber += 3
                 scoreLabel.text = "\(scoreNumber)"
                 
-                if scoreNumber == 10 || scoreNumber == 50 || scoreNumber == 125 || scoreNumber == 200 || scoreNumber == 300 || scoreNumber == 500 {
+                if scoreNumber == 3 || scoreNumber == 15 || scoreNumber == 90 || scoreNumber == 240 || scoreNumber == 600 || scoreNumber == 900 || scoreNumber == 1500 {
+                    
                     spawnNewDisc()
                     spawnBombDisc()
                 }
@@ -186,22 +186,3 @@ class GameScene: SKScene {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

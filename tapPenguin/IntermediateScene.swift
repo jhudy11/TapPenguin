@@ -1,8 +1,8 @@
 //
-//  GameScene.swift
+//  IntermediateScene.swift
 //  tapPenguin
 //
-//  Created by Joshua Hudson on 11/26/16.
+//  Created by Joshua Hudson on 12/3/16.
 //  Copyright © 2016 com.ParanoidPenguinProductions. All rights reserved.
 //
 
@@ -10,9 +10,8 @@ import SpriteKit
 import GameplayKit
 
 //Declared in a global position to allow for use in GameOverScene
-var scoreNumber = 0
 
-class GameScene: SKScene {
+class IntermediateScene: SKScene {
     
     
     let scoreLabel = SKLabelNode(fontNamed: "Pusab")
@@ -32,9 +31,9 @@ class GameScene: SKScene {
         
         super.init(size: size)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     func random() -> CGFloat {
@@ -95,7 +94,7 @@ class GameScene: SKScene {
         
         //Shrink the disc over a timeframe of 3 sec
         disc.run(SKAction.sequence([
-            SKAction.scale(to: 0, duration: 3),
+            SKAction.scale(to: 0, duration: 2),
             playGameOverSoundEffect,
             SKAction.run(runGameOver)
             ]))
@@ -103,7 +102,7 @@ class GameScene: SKScene {
     
     func spawnBombDisc() {
         
-        let randomCountNumber = arc4random()%25
+        let randomCountNumber = arc4random()%10
         
         if randomCountNumber == 0 {
             
@@ -170,10 +169,11 @@ class GameScene: SKScene {
                 spawnNewDisc()
                 spawnBombDisc()
                 
-                scoreNumber += 1
+                scoreNumber += 2
                 scoreLabel.text = "\(scoreNumber)"
                 
-                if scoreNumber == 10 || scoreNumber == 50 || scoreNumber == 125 || scoreNumber == 200 || scoreNumber == 300 || scoreNumber == 500 {
+                if scoreNumber == 2 || scoreNumber == 10 || scoreNumber == 100 || scoreNumber == 250 || scoreNumber == 400 || scoreNumber == 600 || scoreNumber == 1000 {
+                    
                     spawnNewDisc()
                     spawnBombDisc()
                 }
@@ -186,22 +186,3 @@ class GameScene: SKScene {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
